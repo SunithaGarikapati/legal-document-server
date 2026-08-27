@@ -3,138 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Document Server</title>
+    <title>Professional Legal Document Serving | Fast & Reliable Process Server</title>
     <style>
+        :root {
+            --primary-color: #1b365d;
+            --accent-color: #007bc7;
+            --light-bg: #f4f6f9;
+            --text-color: #333333;
+        }
+
         body {
-            background-color: #1e2d4a;
-            color: #ffffff;
-            font-family: Georgia, 'Times New Roman', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 3rem 2rem;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .phone-btn {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            padding: 0.6rem 1.2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .notice-banner {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 0.75rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-bottom: 1px solid #ffeeba;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(27, 54, 93, 0.88), rgba(27, 54, 93, 0.88)), url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: #ffffff;
+            padding: 4.5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .cta-call {
+            display: inline-block;
+            font-size: 1.2rem;
+            background-color: #27ae60;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-size: 1.6rem;
+        }
+
+        .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
-        .left-col h1 {
-            font-size: 3rem;
-            text-decoration: underline;
-            margin-bottom: 1.5rem;
-        }
-
-        .left-col h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .left-col p {
-            line-height: 1.7;
-            font-size: 1.1rem;
-            color: #d1d5db;
-        }
-
-        form {
+        .card {
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.8rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            justify-content: space-between;
         }
 
-        .name-row {
+        .card h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+            font-size: 1.3rem;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 1rem 0 0.3rem 0;
+        }
+
+        .price-subtext {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .exclusion-section {
+            background-color: var(--light-bg);
+            border-left: 4px solid #c0392b;
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 3rem;
+        }
+
+        /* INTAKE FORM STYLES */
+        .form-section {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            margin-top: 3.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 1.5rem;
+        }
+
+        .form-full {
+            grid-column: 1 / -1;
         }
 
         label {
             display: block;
+            font-weight: bold;
             margin-bottom: 0.4rem;
-            font-size: 1rem;
+            color: var(--primary-color);
         }
 
-        label span {
-            font-size: 0.85rem;
-            color: #9ca3af;
-        }
-
-        input, textarea {
+        input, select, textarea {
             width: 100%;
             padding: 0.8rem;
-            border: none;
-            border-radius: 2px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
             box-sizing: border-box;
             font-size: 1rem;
+            font-family: inherit;
         }
 
-        button {
-            background-color: #ffffff;
-            color: #1e2d4a;
-            padding: 0.8rem 2.5rem;
+        .submit-btn {
+            background-color: #27ae60;
+            color: white;
+            padding: 0.9rem 2.5rem;
             border: none;
-            border-radius: 25px;
+            border-radius: 5px;
+            font-size: 1.1rem;
             font-weight: bold;
-            font-size: 1rem;
             cursor: pointer;
-            width: fit-content;
-            margin-top: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #219150;
+        }
+
+        footer {
+            background-color: #111111;
+            color: #aaaaaa;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+            margin-top: 4rem;
         }
 
         @media (max-width: 768px) {
-            .container { grid-template-columns: 1fr; }
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Left Info Column -->
-        <div class="left-col">
-            <h1>Book Document server</h1>
-            <h3>Ready to get started?</h3>
-            <p>Reach out today to book your service</p>
-            <p>Expect a call—because when you contact document server Solutions, you're not just sending a form... you're starting a relationship..</p>
-        </div>
+    <header>
+        <div class="logo">Document Serving Solutions</div>
+        <a href="tel:3105038006" class="phone-btn">Call: (310) 503-8006</a>
+    </header>
 
-        <!-- Right Form Column -->
-        <div class="right-col">
-            <form action="/.netlify/functions/send-sms" method="POST">
-                <div>
-                    <label>Name</label>
-                    <div class="name-row">
-                        <div>
-                            <input type="text" name="firstName" required>
-                            <label style="font-size: 0.8rem; margin-top: 0.2rem;">First Name</label>
-                        </div>
-                        <div>
-                            <input type="text" name="lastName" required>
-                            <label style="font-size: 0.8rem; margin-top: 0.2rem;">Last Name</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label>Phone</label>
-                    <input type="tel" name="phone">
-                </div>
-
-                <div>
-                    <label>Email <span>(required)</span></label>
-                    <input type="email" name="email" required>
-                </div>
-
-                <div>
-                    <label>Message <span>(required)</span></label>
-                    <textarea name="message" rows="5" required></textarea>
-                </div>
-
-                <button type="submit">Send</button>
-            </form>
-        </div>
+    <div class="notice-banner">
+        Notice: We specialize strictly in legal document serving. We do NOT provide legal representation or eviction services.
     </div>
+
+    <section class="hero">
+        <h1>Reliable & Prompt Legal Document Service</h1>
+        <p>Transparent pricing for prompt legal paper serving and process service.</p>
+        <a href="tel:3105038006" class="cta-call">Call Today: (310) 503-8006</a>
+    </section>
+
+    <div class="container">
+        
+        <h2 class="section-title">Legal Document Serving Services & Pricing</h2>
+
+        <!-- PRICING CARDS -->
+        <div class="grid">
+            <div class="card">
+                <div>
+                    <h3>Standard Service</h3>
+                    <p>Subpoenas, summons, small claims, and civil court filings. Up to 3 delivery attempts included.</p>
+                </div>
+                <div>
+                    <div class="price-tag">$75 – $95</div>
+                    <div class="price-subtext">Includes Proof / Affidavit of Service</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>Rush / Priority Service</h3>
+                    <p>First attempt made within 24 hours for time-sensitive legal proceedings and court deadlines.</p>
+                </div>
+                <div>
+                    <div class="price-tag">$125 – $150</div>
+                    <div class="price-subtext">Includes expedited status updates & affidavit</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>Court Filing Delivery</h3>
+                    <p>Direct delivery and handling of paperwork directly to local court clerk offices.</p>
+                </div>
+                <div>
+                    <div class="price-tag">$65</div>
+                    <div class="price-subtext">Flat rate per filing attempt</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXCLUSIONS -->
+        <div class="exclusion-section">
+            <h3 style="color: #c0392b; margin-top: 0;">Scope of Service Policy</h3>
+            <ul style="margin: 0; padding-left: 1.2rem;">
+                <li><strong>No Evictions:</strong> We do not serve eviction notices or assist in lockout enforcement.</li>
+                <li><strong>No Legal Advice:</strong> We are process servers, not attorneys. We cannot provide legal representation.</li>
+            </ul>
+        </div>
+
+        <!-- INTAKE FORM BELOW PRICING -->
+        <section class="form-section">
+            <h2 style="color: var(--primary-color); margin-top: 0; text-align: center;">Submit a Legal Service Request</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 2rem;">Fill out the details below to request process service. You will receive immediate confirmation.</p>
+
+            <form action="/.netlify/functions/send-sms" method="POST" class="form-grid">
+                
+                <div>
+                    <label>First Name *</label>
+                    <input type="text" name="firstName" required placeholder="John">
+                </div>
+
+                <div>
+                    <label>Last Name *</label>
+                    <input type="text" name="lastName" required placeholder="Doe">
+                </div>
+
+                <div>
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" required placeholder="(310) 000-0000">
+                </div>
+
+                <div>
+                    <label>Email Address *</label>
+                    <input type="email" name="email" required placeholder="client@lawfirm.com">
+                </div>
+
+                <div class="form-full">
+                    <label>Service Requested *</label>
+                    <select name="service_type" required>
+                        <option value="Standard Service ($75-$95)">Standard Service ($75 - $95)</option>
+                        <option value="Rush Service ($125-$150)">24-Hour Rush Service ($125 - $150)</option>
+                        <option value="Court Filing ($65)">Court Filing Delivery ($65)</option>
+                    </select>
+                </div>
+
+                <div class="form-full">
+                    <label>Target Name, Service Address & Case Details *</label>
+                    <textarea name="message" rows="4" required placeholder="Enter full target name, delivery address, court date, or special instructions..."></textarea>
+                </div>
+
+                <div class="form-full" style="text-align: center; margin-top: 1rem;">
+                    <button type="submit" class="submit-btn">Submit Service Request</button>
+                </div>
+
+            </form>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Legal Document Serving Solutions. All Rights Reserved. Not a law firm.</p>
+    </footer>
 
 </body>
 </html>
