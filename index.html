@@ -272,7 +272,7 @@
             </div>
         </div>
 
-        <div class="grid">
+        <div class="grid" style="margin-top: 2rem;">
             <div class="card">
                 <div>
                     <h3>Standard Service</h3>
@@ -306,6 +306,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Service Policy -->
         <div class="exclusion-section">
             <h3 style="color: #c0392b; margin-top: 0;">Service Policy</h3>
@@ -338,8 +339,14 @@
             <h2 style="color: var(--primary-color); margin-top: 0; text-align: center;">Submit a Legal Service Request</h2>
             <p style="text-align: center; color: #666; margin-bottom: 2rem;">Fill out the details below to request process service. You will receive immediate confirmation.</p>
 
-            <form action="/.netlify/functions/send-sms" method="POST" class="form-grid">
+            <form action="https://api.web3forms.com/submit" method="POST" class="form-grid" id="intakeForm">
                 
+                <!-- REPLACE YOUR_ACTUAL_ACCESS_KEY_HERE WITH YOUR KEY FROM WEB3FORMS.COM -->
+                <input type="hidden" name="access_key" value="39213787-ddad-438d-8ccd-549a98e8de35">
+
+                <!-- Email Subject Line -->
+                <input type="hidden" name="subject" value="New Legal Document Service Request">
+
                 <div>
                     <label>First Name *</label>
                     <input type="text" name="firstName" required placeholder="John">
@@ -379,6 +386,9 @@
                 </div>
 
             </form>
+
+            <!-- Submission Message Container -->
+            <div id="formResult" style="display: none; text-align: center; margin-top: 1.5rem; padding: 1rem; border-radius: 5px; font-weight: bold;"></div>
         </section>
 
     </div>
@@ -386,6 +396,50 @@
     <footer>
         <p>&copy; 2026 Legal Document Serving Solutions. All Rights Reserved. Not a law firm.</p>
     </footer>
+
+    <script>
+        const form = document.getElementById('intakeForm');
+        const result = document.getElementById('formResult');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            result.style.display = "block";
+            result.style.backgroundColor = "#e2e8f0";
+            result.style.color = "#333";
+            result.innerHTML = "Sending your request...";
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let jsonResponse = await response.json();
+                if (response.status == 200) {
+                    result.style.backgroundColor = "#d4edda";
+                    result.style.color = "#155724";
+                    result.innerHTML = "Thank you! Your service request has been submitted successfully.";
+                    form.reset();
+                } else {
+                    result.style.backgroundColor = "#f8d7da";
+                    result.style.color = "#721c24";
+                    result.innerHTML = jsonResponse.message || "Something went wrong. Please call us directly.";
+                }
+            })
+            .catch(error => {
+                result.style.backgroundColor = "#f8d7da";
+                result.style.color = "#721c24";
+                result.innerHTML = "Something went wrong. Please try again or call us.";
+            });
+        });
+    </script>
 
 </body>
 </html>
