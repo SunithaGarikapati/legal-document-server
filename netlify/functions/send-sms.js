@@ -47,11 +47,4 @@ exports.handler = async (event) => {
             body: 'Error processing your request.'
         };
     }
-};    } catch (error) {
-        console.error('Twilio Error:', error);
-        return {
-            statusCode: 500,
-            body: 'Error sending SMS notification.'
-        };
-    }
 };
