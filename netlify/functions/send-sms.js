@@ -1,12 +1,10 @@
-const twilio = require('twilio');
+const nodemailer = require('nodemailer');
 
-exports.handler = async (event, context) => {
-    // Only allow POST requests
+exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
-    // Parse incoming form data
     const params = new URLSearchParams(event.body);
     const firstName = params.get('firstName') || '';
     const lastName = params.get('lastName') || '';
@@ -14,20 +12,28 @@ exports.handler = async (event, context) => {
     const email = params.get('email') || '';
     const message = params.get('message') || '';
 
-    // Environment variables set in Netlify dashboard
-    const accountSid = process.env.TWILIO_ACCOUNT_SID;
-    const authToken = process.env.TWILIO_AUTH_TOKEN;
-    const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
+    // Choose your carrier email-to-sms gateway address:
+    // T-Mobile: 3105038006@tmomail.net
+    // Verizon:  3105038006@vtext.com
+    // AT&T:     3105038006@txt.att.net
+    const recipientSmsEmail = process.env.SMS_RECIPIENT_EMAIL || '3105038006@tmomail.net';
 
-    const client = twilio(accountSid, authToken);
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.GMAIL_USER,       // Your Gmail address
+            pass: process.env.GMAIL_APP_PASS    // Your 16-character Google App Password
+        }
+    });
 
-    const smsContent = `New Service Request!\nName: ${firstName} ${lastName}\nPhone: ${phone}\nEmail: ${email}\nMsg: ${message}`;
+    const smsText = `New Request!\nName: ${firstName} ${lastName}\nPhone: ${phone}\nEmail: ${email}\nMsg: ${message}`;
 
     try {
-        await client.messages.create({
-            body: smsContent,
-            from: twilioPhoneNumber,
-            to: '+13105038006' // Your mobile number
+        await transporter.sendMail({
+            from: process.env.GMAIL_USER,
+            to: recipientSmsEmail,
+            subject: 'New Web Intake Request',
+            text: smsText
         });
 
         return {
@@ -35,6 +41,13 @@ exports.handler = async (event, context) => {
             body: '<h2>Thank you! Your request has been received.</h2>'
         };
     } catch (error) {
+        console.error('Email-to-SMS Error:', error);
+        return {
+            statusCode: 500,
+            body: 'Error processing your request.'
+        };
+    }
+};    } catch (error) {
         console.error('Twilio Error:', error);
         return {
             statusCode: 500,
