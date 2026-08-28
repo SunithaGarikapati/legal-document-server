@@ -227,6 +227,49 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Container for side-by-side alignment */
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+        
+        /* Base style for both CTA buttons */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none; /* Removes the underline */
+            border-radius: 6px;
+            transition: background-color 0.2s ease-in-out;
+        }
+        
+        /* Green Call Button */
+        .cta-call {
+            background-color: #27ae60;
+            color: #ffffff;
+        }
+        
+        .cta-call:hover {
+            background-color: #219150;
+        }
+        
+        /* Blue Text Button with Solid Background */
+        .cta-text {
+            background-color: #2980b9;
+            color: #ffffff;
+        }
+        
+        .cta-text:hover {
+            background-color: #1f6391;
+        }
     </style>
 </head>
 <body>
