@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <header>
-    <div class="logo">
-        <img src="logo.svg" alt="SCV Process Server Logo" class="logo-img">
-    </div>
-    <a href="tel:3105038006" class="phone-btn">Call: (310) 503-8006</a>
-    </header>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Legal Document Serving | Fast & Reliable Process Server</title>
+    
     <style>
         :root {
             --primary-color: #1b365d;
@@ -39,8 +34,23 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-size: 1.3rem;
             font-weight: bold;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            display: block;
+        }
+
+        /* Hide broken image icon if logo SVG hasn't loaded */
+        .logo-img:not([src]), 
+        .logo-img[src=""] {
+            display: none;
         }
 
         .phone-btn {
@@ -50,6 +60,11 @@
             text-decoration: none;
             border-radius: 4px;
             font-weight: bold;
+            transition: background 0.2s ease;
+        }
+
+        .phone-btn:hover {
+            background-color: #005ea2;
         }
 
         .notice-banner {
@@ -78,17 +93,6 @@
             font-size: 1.15rem;
             max-width: 700px;
             margin: 0 auto 1.5rem auto;
-        }
-
-        .cta-call {
-            display: inline-block;
-            font-size: 1.2rem;
-            background-color: #27ae60;
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
         }
 
         .container {
@@ -145,7 +149,7 @@
             border-left: 4px solid #c0392b;
             padding: 1.5rem;
             border-radius: 0 8px 8px 0;
-            margin-top: 3rem;
+            margin-top: 2rem;
         }
 
         /* SERVICE AREAS TOP HIGHLIGHT BAR */
@@ -224,17 +228,7 @@
             margin-top: 4rem;
         }
 
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Container for side-by-side alignment */
+        /* Hero CTA buttons */
         .hero-buttons {
             display: flex;
             gap: 15px;
@@ -244,7 +238,6 @@
             margin-top: 25px;
         }
         
-        /* Base style for both CTA buttons */
         .cta-btn {
             display: inline-flex;
             align-items: center;
@@ -252,12 +245,11 @@
             padding: 14px 24px;
             font-size: 1rem;
             font-weight: bold;
-            text-decoration: none; /* Removes the underline */
+            text-decoration: none;
             border-radius: 6px;
             transition: background-color 0.2s ease-in-out;
         }
         
-        /* Green Call Button */
         .cta-call {
             background-color: #27ae60;
             color: #ffffff;
@@ -267,7 +259,6 @@
             background-color: #219150;
         }
         
-        /* Blue Text Button with Solid Background */
         .cta-text {
             background-color: #2980b9;
             color: #ffffff;
@@ -277,19 +268,27 @@
             background-color: #1f6391;
         }
 
-        .logo-img {
-            height: 50px;
-            width: auto;
-            display: block;
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Document Serving Solutions</div>
-        <a href="tel:3105038006" class="phone-btn">Call: (310) 503-8006</a>
+        <div class="logo">
+            <img src="logo.svg" alt="SCV Process Server Logo" class="logo-img">
+            <span>Document Serving Solutions</span>
+        </div>
+        <a href="tel:3105038006" class="phone-btn">📞 Call: (310) 503-8006</a>
     </header>
+
     <div class="service-areas-bar">
         📍 <strong>Service Areas Covered:</strong> Santa Clarita | Valencia | Stevenson Ranch | Castaic | Newhall | Granada Hills | Sylmar 
     </div>
@@ -316,7 +315,7 @@
             <div class="card">
                 <div>
                     <h3>Standard Service</h3>
-                    <p>Subpoenas, summons, small claims, and civil court filings. Up to 1 delivery attempts conducted withing 72 hours. This price per 1 person</p>
+                    <p>Subpoenas, summons, small claims, and civil court filings. Up to 1 delivery attempt conducted within 72 hours. Price per 1 person.</p>
                 </div>
                 <div>
                     <div class="price-tag">$75</div>
@@ -337,8 +336,8 @@
 
             <div class="card">
                 <div>
-                    <h3>Rush delivery on sameday</h3>
-                    <p>Same day rush delivery done at additional cost within 24 hours</p>
+                    <h3>Same Day Rush Delivery</h3>
+                    <p>Same day rush delivery conducted within 24 hours.</p>
                 </div>
                 <div>
                     <div class="price-tag">$200</div>
@@ -350,8 +349,8 @@
         <div class="grid" style="margin-top: 2rem;">
             <div class="card">
                 <div>
-                    <h3>Standard Service</h3>
-                    <p>Subpoenas, summons, small claims, and civil court filings. 2nd or 3rd delivery attempt conducted withing 72 hours incase of first failed attempt. This price per 1 person</p>
+                    <h3>Standard Re-Attempt Service</h3>
+                    <p>Subpoenas, summons, small claims, and civil court filings. 2nd or 3rd delivery attempt conducted within 72 hours in case of first failed attempt. Price per 1 person.</p>
                 </div>
                 <div>
                     <div class="price-tag">$60</div>
@@ -361,8 +360,8 @@
 
             <div class="card">
                 <div>
-                    <h3>Rush / Priority Service</h3>
-                    <p>First attempt made and failed for time-sensitive legal proceedings and court deadlines. Incase if you what to make 2nd rush attmpt within 48 hours </p>
+                    <h3>Rush Re-Attempt Service</h3>
+                    <p>Second rush attempt made within 48 hours following a initial failed attempt for time-sensitive proceedings.</p>
                 </div>
                 <div>
                     <div class="price-tag">$125</div>
@@ -373,7 +372,7 @@
             <div class="card">
                 <div>
                     <h3>Serve by Mail</h3>
-                    <p>Email, USPS, UPS, FEDEX after getting court permission only when an Alternative Service Method is Approved of by the Court.</p>
+                    <p>Email, USPS, UPS, or FedEx delivery after obtaining court approval for an Alternative Service Method.</p>
                 </div>
                 <div>
                     <div class="price-tag">$99</div>
@@ -391,9 +390,9 @@
             </ul>
         </div>
 
-        <!-- Proof of service attempts -->
+        <!-- Proof of Service Attempts -->
         <div class="exclusion-section">
-            <h3 style="color: #c0392b; margin-top: 0;">Proof of service sttempts</h3>
+            <h3 style="color: #c0392b; margin-top: 0;">Proof of Service Attempts</h3>
             <ul style="margin: 0; padding-left: 1.2rem;">
                 <li><strong>Email Confirmation:</strong> Documented evidence and photo verification are delivered electronically upon attempt.</li>
                 <li><strong>Detailed Logs:</strong> Reports include precise timestamps and field observations noted at the time of service.</li>
@@ -415,11 +414,7 @@
             <p style="text-align: center; color: #666; margin-bottom: 2rem;">Fill out the details below to request process service. You will receive immediate confirmation.</p>
 
             <form action="https://api.web3forms.com/submit" method="POST" class="form-grid" id="intakeForm">
-                
-                <!-- REPLACE YOUR_ACTUAL_ACCESS_KEY_HERE WITH YOUR KEY FROM WEB3FORMS.COM -->
                 <input type="hidden" name="access_key" value="39213787-ddad-438d-8ccd-549a98e8de35">
-
-                <!-- Email Subject Line -->
                 <input type="hidden" name="subject" value="New Legal Document Service Request">
 
                 <div>
@@ -445,9 +440,10 @@
                 <div class="form-full">
                     <label>Service Requested *</label>
                     <select name="service_type" required>
-                        <option value="Standard Service $75">Standard Service ($75 - $95)</option>
-                        <option value="Rush Service $125-$150">24-Hour to 48 Hour Service ($125 - $150)</option>
+                        <option value="Standard Service $75">Standard Service ($75)</option>
+                        <option value="Rush Service $125">Rush / Priority Service ($125)</option>
                         <option value="Same Day Rush Service $200">Same Day Rush Service ($200)</option>
+                        <option value="Serve by Mail $99">Serve by Mail ($99)</option>
                     </select>
                 </div>
 
@@ -459,10 +455,8 @@
                 <div class="form-full" style="text-align: center; margin-top: 1rem;">
                     <button type="submit" class="submit-btn">Submit Service Request</button>
                 </div>
-
             </form>
 
-            <!-- Submission Message Container -->
             <div id="formResult" style="display: none; text-align: center; margin-top: 1.5rem; padding: 1rem; border-radius: 5px; font-weight: bold;"></div>
         </section>
 
