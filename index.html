@@ -30,9 +30,7 @@
     </script>
 
     <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=5">
-    
     <link rel="icon" type="image/svg+xml" href="favicon.svg?v=5">
-    
     <link rel="apple-touch-icon" href="favicon.png?v=5">
     
     <style>
@@ -81,7 +79,6 @@
             display: block;
         }
 
-        /* Hide broken image icon if logo SVG hasn't loaded */
         .logo-img:not([src]), 
         .logo-img[src=""] {
             display: none;
@@ -108,7 +105,7 @@
             background-color: #005ea2;
         }
 
-        /* Plain Email Header Container */
+        /* Email Display Box */
         .email-display-container {
             display: flex;
             align-items: center;
@@ -260,7 +257,6 @@
             margin-top: 2rem;
         }
 
-        /* SERVICE AREAS TOP HIGHLIGHT BAR */
         .service-areas-bar {
             background-color: #112233;
             color: #ffffff;
@@ -274,7 +270,6 @@
             color: #3498db;
         }
         
-        /* INTAKE FORM STYLES */
         .form-section {
             background-color: #ffffff;
             border: 1px solid #e2e8f0;
@@ -345,14 +340,21 @@
             text-decoration: underline;
         }
 
-        /* Hero CTA buttons */
+        /* Hero Container Controls */
+        .hero-buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
         .hero-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            margin-top: 25px;
         }
         
         .cta-btn {
@@ -394,15 +396,6 @@
             background-color: #1f6391;
         }
 
-        .cta-email {
-            background-color: #8e44ad;
-            color: #ffffff;
-        }
-
-        .cta-email:hover {
-            background-color: #7d3c98;
-        }
-
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
@@ -424,12 +417,12 @@
         <div class="header-actions">
             <a href="tel:3105038006" class="phone-btn">📞 Call: (310) 503-8006</a>
             <div class="email-display-container">
-                <span class="email-text" id="headerEmail">scv.server.order@gmail.com</span>
-                <button class="copy-btn" id="copyEmailBtn" aria-label="Copy email address" title="Copy email address">
+                <span class="email-text">scv.server.order@gmail.com</span>
+                <button class="copy-btn copy-email-action" aria-label="Copy email address" title="Copy email address">
                     <svg viewBox="0 0 24 24">
                         <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
                     </svg>
-                    <span class="copy-tooltip" id="copyTooltip">Copied!</span>
+                    <span class="copy-tooltip">Copied!</span>
                 </button>
             </div>
         </div>
@@ -446,16 +439,27 @@
     <section class="hero">
         <h1>Professional Process Server in Santa Clarita & LA County</h1>
         <p>Prompt, reliable legal document serving for subpoenas, summons, small claims, and court filings.</p>
-        <div class="hero-buttons">
-            <a href="#intake-form-section" class="cta-btn cta-form">📝 Submit Request Online</a>
-            <a href="tel:3105038006" class="cta-btn cta-call">📞 Call: (310) 503-8006</a>
-            <a href="sms:3105038006" class="cta-btn cta-text">💬 Text: (310) 503-8006</a>
-            <a href="mailto:scv.server.order@gmail.com" class="cta-btn cta-email">✉️ Email Orders</a>
+        
+        <div class="hero-buttons-container">
+            <div class="hero-buttons">
+                <a href="#intake-form-section" class="cta-btn cta-form">📝 Submit Request Online</a>
+                <a href="tel:3105038006" class="cta-btn cta-call">📞 Call: (310) 503-8006</a>
+                <a href="sms:3105038006" class="cta-btn cta-text">💬 Text: (310) 503-8006</a>
+            </div>
+            
+            <div class="email-display-container">
+                <span class="email-text">scv.server.order@gmail.com</span>
+                <button class="copy-btn copy-email-action" aria-label="Copy email address" title="Copy email address">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                    </svg>
+                    <span class="copy-tooltip">Copied!</span>
+                </button>
+            </div>
         </div>
     </section>
 
     <div class="container">
-        
         <h2 class="section-title">Legal Document Serving Services & Pricing</h2>
 
         <div class="grid">
@@ -611,20 +615,21 @@
     </footer>
 
     <script>
-        // One-Click Email Copy Functionality
-        const copyEmailBtn = document.getElementById('copyEmailBtn');
-        const headerEmail = document.getElementById('headerEmail');
-        const copyTooltip = document.getElementById('copyTooltip');
+        // Multi-Element Email Copy Handler
+        document.querySelectorAll('.copy-email-action').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const emailContainer = this.closest('.email-display-container');
+                const emailText = emailContainer.querySelector('.email-text').innerText;
+                const tooltip = emailContainer.querySelector('.copy-tooltip');
 
-        copyEmailBtn.addEventListener('click', function() {
-            const emailText = headerEmail.innerText;
-            navigator.clipboard.writeText(emailText).then(() => {
-                copyTooltip.classList.add('show');
-                setTimeout(() => {
-                    copyTooltip.classList.remove('show');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
+                navigator.clipboard.writeText(emailText).then(() => {
+                    tooltip.classList.add('show');
+                    setTimeout(() => {
+                        tooltip.classList.remove('show');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
             });
         });
 
