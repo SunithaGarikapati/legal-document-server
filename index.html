@@ -47,6 +47,10 @@
             --text-color: #333333;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -283,6 +287,15 @@
             border-radius: 6px;
             transition: background-color 0.2s ease-in-out;
         }
+
+        .cta-form {
+            background-color: #e67e22;
+            color: #ffffff;
+        }
+
+        .cta-form:hover {
+            background-color: #d35400;
+        }
         
         .cta-call {
             background-color: #27ae60;
@@ -335,6 +348,7 @@
         <h1>Professional Process Server in Santa Clarita & LA County</h1>
         <p>Prompt, reliable legal document serving for subpoenas, summons, small claims, and court filings.</p>
         <div class="hero-buttons">
+            <a href="#intake-form-section" class="cta-btn cta-form">📝 Submit Request Online</a>
             <a href="tel:3105038006" class="cta-btn cta-call">📞 Call Today: (310) 503-8006</a>
             <a href="sms:3105038006" class="cta-btn cta-text">💬 Text Us: (310) 503-8006</a>
         </div>
@@ -443,7 +457,7 @@
         </div>
 
         <!-- INTAKE FORM BELOW PRICING -->
-        <section class="form-section">
+        <section class="form-section" id="intake-form-section">
             <h2 style="color: var(--primary-color); margin-top: 0; text-align: center;">Submit a Service Request</h2>
             <p style="text-align: center; color: #666; margin-bottom: 2rem;">Fill out the details below to request process service. You will receive immediate confirmation.</p>
 
