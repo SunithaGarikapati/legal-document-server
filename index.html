@@ -90,7 +90,7 @@
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
@@ -108,18 +108,71 @@
             background-color: #005ea2;
         }
 
-        .email-btn {
-            background-color: #27ae60;
-            color: #ffffff;
-            padding: 0.6rem 1.2rem;
-            text-decoration: none;
+        /* Plain Email Header Container */
+        .email-display-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 0.8rem;
             border-radius: 4px;
-            font-weight: bold;
-            transition: background 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.95rem;
         }
 
-        .email-btn:hover {
-            background-color: #219150;
+        .email-text {
+            color: #ffffff;
+            font-weight: 600;
+            user-select: all;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            transition: background 0.2s ease, transform 0.1s ease;
+            position: relative;
+        }
+
+        .copy-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.95);
+        }
+
+        .copy-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #27ae60;
+            color: #ffffff;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 3px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .copy-tooltip.show {
+            opacity: 1;
         }
 
         .notice-banner {
@@ -370,7 +423,15 @@
         </div>
         <div class="header-actions">
             <a href="tel:3105038006" class="phone-btn">📞 Call: (310) 503-8006</a>
-            <a href="mailto:scv.server.order@gmail.com" class="email-btn">✉️ Email Us</a>
+            <div class="email-display-container">
+                <span class="email-text" id="headerEmail">scv.server.order@gmail.com</span>
+                <button class="copy-btn" id="copyEmailBtn" aria-label="Copy email address" title="Copy email address">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                    </svg>
+                    <span class="copy-tooltip" id="copyTooltip">Copied!</span>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -550,6 +611,24 @@
     </footer>
 
     <script>
+        // One-Click Email Copy Functionality
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        const headerEmail = document.getElementById('headerEmail');
+        const copyTooltip = document.getElementById('copyTooltip');
+
+        copyEmailBtn.addEventListener('click', function() {
+            const emailText = headerEmail.innerText;
+            navigator.clipboard.writeText(emailText).then(() => {
+                copyTooltip.classList.add('show');
+                setTimeout(() => {
+                    copyTooltip.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+
+        // Form Submission Handling
         const form = document.getElementById('intakeForm');
         const result = document.getElementById('formResult');
 
